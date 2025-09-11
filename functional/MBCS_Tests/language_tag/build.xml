@@ -25,7 +25,15 @@ limitations under the License.
 	<property name="DEST" value="${BUILD_ROOT}/functional/MBCS_Tests/language_tag" />
 
 	<!--Properties for this particular build-->
-	<property name="src" location="./src" />
+	<if>
+		<matches string="${JDK_VERSION}" pattern="^(24|25)$$" />
+		<then>
+			<property name="src" location="./src_24" />
+		</then>
+		<else>
+			<property name="src" location="./src" />
+		</else>
+	</if>
 	<property name="build" location="./bin" />
 	<property name="LIB" value="junit4,testng,jcommander"/>
 	<import file="${TEST_ROOT}/TKG/scripts/getDependencies.xml"/>
